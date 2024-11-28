@@ -18,21 +18,21 @@ class PostType extends AbstractType
         $builder
             ->add('title')
             ->add('content')
-            ->add('publishedAt', null, [
-                'widget' => 'single_text',
-            ])
+            // ->add('publishedAt', null, [
+            //     'widget' => 'single_text',
+            // ])
 			->add('picture', FileType::class, [
 				'label' => 'Upload a picture',
 				'mapped' => false, // The file is not part of the Post entity, it is handled separately
 			'required' => false, 
 			])
-           ->add('creator', EntityType::class, [
-                'class' => User::class,
-                'choice_label' => 'id',
-            ])
+           // ->add('creator', EntityType::class, [
+           //      'class' => User::class,
+           //      'choice_label' => 'id',
+           //  ])
             ->add('category', EntityType::class, [
                 'class' => category::class,
-                'choice_label' => 'id',
+                'choice_label' => 'name',
             ])
         ;
     }

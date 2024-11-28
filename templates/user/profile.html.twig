@@ -1,0 +1,64 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}User Profile{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1 class="mb-4 text-center">User Profile</h1>
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <h2 class="h5">Profile Details</h2>
+            <ul class="list-unstyled">
+                <li><strong>Email:</strong> {{ user.email }}</li>
+                <li><strong>First Name:</strong> {{ user.firstName }}</li>
+                <li><strong>Last Name:</strong> {{ user.lastName }}</li>
+            </ul>
+        </div>
+    </div>
+
+    {% if edit %}
+    	<p>
+	    	Looking to log out ? <a href="/logout">Click here</a>
+    	</p>
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h2 class="h5 mb-4">Edit Your Profile</h2>
+
+                {{ form_start(form, { 'attr': { 'class': 'needs-validation', 'novalidate': 'novalidate' } }) }}
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            {{ form_label(form.email, null, { 'label_attr': { 'class': 'form-label' } }) }}
+                            {{ form_widget(form.email, { 'attr': { 'class': 'form-control' } }) }}
+                            {{ form_errors(form.email) }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            {{ form_label(form.firstName, null, { 'label_attr': { 'class': 'form-label' } }) }}
+                            {{ form_widget(form.firstName, { 'attr': { 'class': 'form-control' } }) }}
+                            {{ form_errors(form.firstName) }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            {{ form_label(form.lastName, null, { 'label_attr': { 'class': 'form-label' } }) }}
+                            {{ form_widget(form.lastName, { 'attr': { 'class': 'form-control' } }) }}
+                            {{ form_errors(form.lastName) }}
+                        </div>
+                    </div>
+                </div>
+
+              <div class="mt-4">
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <a href="{{ path('profile', { 'id': user.id }) }}" class="btn btn-secondary">Cancel</a>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
+

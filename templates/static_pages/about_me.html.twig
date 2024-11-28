@@ -1,0 +1,43 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}About Me{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-body">
+            <h1 class="card-title text-center">About Me</h1>
+            <hr>
+            <div class="row">
+                <div class="col-md-4 text-center">
+                    <img src="{{ asset('assets/person.jpg') }}" alt="Profile Picture" class="img-fluid rounded-circle mb-3" style="max-width: 200px;">
+                </div>
+                <div class="col-md-8">
+                    <p class="lead">
+                        Hello! My name is [Your Name], and I am passionate about [Your Passion or Profession].
+                        I have [X years] of experience in [Your Field/Expertise] and enjoy [Hobby or Interest].
+                    </p>
+                    <p>
+                        In my free time, I love [list hobbies or activities you enjoy, e.g., reading, traveling, coding].
+                        I believe in continuous learning and growth, which drives me to explore new challenges and opportunities.
+                    </p>
+                    <p>
+                        Feel free to reach out if you'd like to connect or collaborate on a project!
+                    </p>
+                   	<p>
+	                   	And of course, i put all my personality in this blog and it’s not at all a way to brand myself out to potential employers, or anything of the sort.
+					</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mt-4">
+        <h2>Contact Information</h2>
+        <p><strong>Email:</strong> emilien.dessarps@ecole-hexagone.com</p>
+        <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/" target="_blank">I do not have a linkedIn account</a></p>
+        <p><strong>GitHub:</strong> <a href="https://github.com/AKArien0" target="_blank">AKArien0</a></p>
+    </div>
+</div>
+{% endblock %}
+

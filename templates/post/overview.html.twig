@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Articles List{% endblock %}
+
+{% block body %}
+    <div class="container my-4">
+        <h1 class="mb-4">Articles</h1>
+        {% include 'posts_list.html.twig' with {posts: posts} %}
+    </div>
+{% endblock %}
+

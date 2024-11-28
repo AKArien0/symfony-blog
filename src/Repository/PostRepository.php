@@ -16,6 +16,10 @@ class PostRepository extends ServiceEntityRepository
         parent::__construct($registry, Post::class);
     }
 
+    public function getById(int $id): Post {
+	    return $this->createQueryBuilder("p")->andWhere("p.id = :id")->setParameter("id", $id)->getQuery()->getResult()[0];
+    }
+
     public function getLatest(int $amount): array {
 	    return $this->createQueryBuilder('p')
 	    	->orderBy('p.publishedAt')
