@@ -5,7 +5,8 @@
 {% block body %}
 
 	{% if is_granted("ROLE_ADMIN")  %}
-	    <a href="/create/post" class="btn btn-primary">Create Article</a>
+	    <a href="/create/post" class="btn btn-primary">Create article</a>
+	    <a href="/user/list" class="btn btn-primary">Handle users</a>
 	{% endif %}
 
     <div class="container my-4">

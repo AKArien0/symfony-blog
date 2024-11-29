@@ -38,7 +38,7 @@ class PostController extends AbstractController
 	    }
 	    $comments = $post->getComments();
 
-		if ($this->getUser() && in_array("ROLE_USER", $this->getUser()->getRoles())){
+		if ($this->getUser() && (in_array("ROLE_USER", $this->getUser()->getRoles()) || in_array("ROLE_ADMIN", $this->getUser()->getRoles()))){
 			$comment = new Comment();
 			$form = $this->createForm(CommentType::class, $comment);
 
@@ -92,4 +92,22 @@ class PostController extends AbstractController
 		return $this->render("post/create.html.twig", ["form" => $form->createView()]);
 	}
 
+	#[IsGranted("ROLE_ADMIN")]
+	#[Route("/delete/post/{id}", name: "delete_post")]
+	public function delete(PostRepository $postRepository, int $id, Request $request, EntityManagerInterface $entityManager): Response {
+	    $post = $postRepository->getById($id);
+	    if (!$post){
+			die;
+	    }
+	    $comments = $post->getComments();
+		foreach ($comments as $comment){
+			$entityManager->remove($comment);
+		}
+		$entityManager->remove($post);
+		$entityManager->flush();
+
+		$this->addFlash("success", "Post deleted successfully");
+
+		return $this->redirectToRoute("recent_posts");
+	}
 }

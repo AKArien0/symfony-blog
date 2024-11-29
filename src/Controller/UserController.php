@@ -62,7 +62,7 @@ class UserController extends AbstractController
 		if (!$user){
 			die;
 		}
-	    elseif ($this->getUser()->getId() == $id){
+	    elseif ($this->getUser() && $this->getUser()->getId() == $id){
 			$form = $this->createForm(UserType::class, $user);
 			$form->handleRequest($request);
 

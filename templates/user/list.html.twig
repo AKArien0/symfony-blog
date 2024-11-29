@@ -38,6 +38,8 @@
                             <input type="hidden" name="_method" value="POST">
                             <button class="btn btn-danger">Deactivate</button>
                         </form>
+                    {% elseif "ROLE_ADMIN" in user.roles %}
+                        <span class="text-muted">Admin</span>
                     {% else %}
                         <span class="text-muted">Deactivated</span>
                     {% endif %}
