@@ -38,7 +38,7 @@ class PostController extends AbstractController
 	    }
 	    $comments = $post->getComments();
 
-		if ($this->getUser()){
+		if ($this->getUser() && in_array("ROLE_USER", $this->getUser()->getRoles())){
 			$comment = new Comment();
 			$form = $this->createForm(CommentType::class, $comment);
 

@@ -43,9 +43,19 @@
 
             {% else %}
 
-                <p>
-                    <a href="/login">Sign in</a> to leave comments.
-                </p>
+				{% if app.user is not null %}
+
+	                <p>
+	                    Your account has been disabled. Contact me to talk this out.
+	                </p>
+
+				{% else %}
+				
+	                <p>
+	                    <a href="/login">Sign in</a> to leave comments.
+	                </p>
+
+	            {% endif %}
                 
             {% endif %}
 

@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin - Manage Users{% endblock %}
+
+{% block body %}
+<h1>Manage Users</h1>
+
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success">{{ message }}</div>
+{% endfor %}
+
+{% for message in app.flashes('error') %}
+    <div class="alert alert-danger">{{ message }}</div>
+{% endfor %}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Roles</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.firstName}}</td>
+                <td>{{ user.lastName}}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.roles | join(', ') }}</td>
+                <td>
+                    {% if 'ROLE_USER' in user.roles %}
+                        <form action="{{ path('deactivate_profile', { id: user.id }) }}" method="post" onsubmit="return confirm('Are you sure you want to deactivate this user?');">
+                            <input type="hidden" name="_method" value="POST">
+                            <button class="btn btn-danger">Deactivate</button>
+                        </form>
+                    {% else %}
+                        <span class="text-muted">Deactivated</span>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+
