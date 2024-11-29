@@ -15,7 +15,7 @@
                     </div>
                     <div class="col-md-4">
                         {% if post.picture %}
-                            <img src="{{ asset('public/media/images/' ~ post.picture) }}" alt="No illustration image this time !" class="img-fluid rounded">
+                            <img src="media/articles_images/{{post.picture}}" alt="No illustration image this time !" class="img-fluid rounded">
                         {% else %}
                             <img src="https://via.placeholder.com/150" alt="No Image" class="img-fluid rounded">
                         {% endif %}
