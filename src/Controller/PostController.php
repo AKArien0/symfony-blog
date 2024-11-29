@@ -63,12 +63,19 @@ class PostController extends AbstractController
     }
     
 	#[IsGranted('ROLE_ADMIN')]
+	#[Route('/create/post/{id}', name: "edit_post")]
 	#[Route('/create/post', name: 'create_post')]
-	public function create(Request $request, EntityManagerInterface $entityManager): Response {
+	public function create(Request $request, EntityManagerInterface $entityManager, int $id = null, PostRepository $postRepository): Response {
 		if (!$this->isGranted("ROLE_ADMIN")){
 			throw $this->createAccessDeniedException("You do not have access to this. Try befriending me first.");
 		}
-		$post = new Post();
+		$post;
+		if ($id){
+			$post = $postRepository->getById($id);
+		}
+		else{
+			$post = new Post();
+		}
 		$form = $this->createForm(PostType::class, $post);
 
 		$form->handleRequest($request);
@@ -89,6 +96,13 @@ class PostController extends AbstractController
 			return $this->redirectToRoute("view_post", ["id" => $post->getId()]);
 		}
 
+		if ($id){
+			$form->get('title')->setData($post->getTitle());
+			$form->get('content')->setData($post->getContent());
+			$form->get('category')->setData($post->getCategory());
+			$form->get('picture')->setData($post->getPicture());
+
+		}
 		return $this->render("post/create.html.twig", ["form" => $form->createView()]);
 	}
 
